@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>wdfxf 的空间</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:#0b1220;color:#e2e8f0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh}
+.wrap{max-width:680px;margin:0 auto;padding:40px 20px 60px}
+h1{font-size:26px;font-weight:800;text-align:center;margin-bottom:6px}
+.sub{text-align:center;color:#64748b;font-size:13px;margin-bottom:34px}
+.crumb{font-size:13px;color:#64748b;margin-bottom:18px;display:none;align-items:center;gap:8px}
+.crumb a{color:#38bdf8;text-decoration:none;cursor:pointer}
+.folder{display:flex;align-items:center;gap:16px;background:#151f36;border:1px solid #24304d;border-radius:16px;padding:20px;margin-bottom:14px;cursor:pointer;transition:.15s}
+.folder:hover{border-color:#3b82f6;transform:translateY(-2px)}
+.folder .ic{font-size:38px}
+.folder h2{font-size:17px;font-weight:700}
+.folder p{font-size:12px;color:#64748b;margin-top:4px;line-height:1.6}
+.folder .cnt{margin-left:auto;color:#475569;font-size:12px;white-space:nowrap}
+.view{display:none}
+.view.on{display:block}
+.proj{background:#151f36;border:1px solid #24304d;border-radius:14px;padding:16px;margin-bottom:12px}
+.proj h3{font-size:16px;margin-bottom:4px}
+.proj .desc{font-size:13px;color:#94a3b8;line-height:1.7}
+.proj .from{font-size:11px;color:#64748b;margin-top:6px}
+.proj .links{margin-top:10px;display:flex;gap:10px}
+.proj .links a{text-decoration:none;font-size:12px;padding:6px 14px;border-radius:8px;background:#0b1220;border:1px solid #24304d;color:#7dd3fc}
+.proj .links a:hover{border-color:#38bdf8}
+.note{font-size:12px;color:#475569;text-align:center;margin-top:30px;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>wdfxf 的空间</h1>
+  <div class="sub">读书产生想法 · 想法做成产品</div>
+
+  <!-- 根目录：两个大文件夹 -->
+  <div class="view on" id="v-root">
+    <div class="folder" onclick="openView('public')">
+      <div class="ic">🌍</div>
+      <div><h2>公共空间</h2><p>做出来的产品与开源项目，所有人可见</p></div>
+      <div class="cnt" id="cntPub"></div>
+    </div>
+    <div class="folder" onclick="location.href='https://github.com/wdfxf/p-private-hub'">
+      <div class="ic">🔒</div>
+      <div><h2>私人空间</h2><p>经历 · 思想 · 人生系统——仅自己可见</p></div>
+      <div class="cnt">→ GitHub</div>
+    </div>
+  </div>
+
+  <!-- 公共空间 -->
+  <div class="view" id="v-public">
+    <div class="crumb"><a onclick="openView('root')">🏠 根目录</a> / 🌍 公共空间</div>
+    <div class="proj">
+      <h3>💰 六账户记账 <span style="font-size:11px;color:#22c55e;border:1px solid #22c55e;border-radius:6px;padding:1px 6px;vertical-align:2px">开源</span></h3>
+      <div class="desc">单文件、零依赖的手机记账应用。六账户预算自动归类，月度进度条，数据全本地不上传。</div>
+      <div class="from">想法来源：《有钱人和你想的不一样》（哈维·艾克）财富档案 14 六账户管理法</div>
+      <div class="links"><a href="https://github.com/wdfxf/six-account-ledger">📦 仓库</a><a href="https://wdfxf.github.io/six-account-ledger/">🚀 在线使用</a></div>
+    </div>
+    <!-- 新项目在此之下复制一个 .proj 块 -->
+  </div>
+
+  <div class="note" id="foot">© 2026 wdfxf · Built with a reading habit</div>
+</div>
+<script>
+function openView(v){
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
+  if(v==='root'){$('v-root').classList.add('on')}
+  else{$('v-'+v).classList.add('on');$('v-'+v).querySelector('.crumb').style.display='flex'}
+  window.scrollTo(0,0);
+}
+function $(id){return document.getElementById(id)}
+$('cntPub').textContent=document.querySelectorAll('#v-public .proj').length+' 个项目';
+if(location.hash==='#public')openView('public');
+</script>
+</body>
+</html>
